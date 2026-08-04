@@ -8,7 +8,7 @@ waves. Currently only gravity wave dispersion relations are implemented.
 
 !!! note
 
-    When building the struct to properly convert units we ask for the dispersion relation 
+    When using the DispersionRelation structure we ask for the dispersion relation 
     ($\Omega(k)$), but this is simply preference over phase velocity ($V_p$) or group
     velocity ($V_g$)
 
@@ -66,10 +66,8 @@ Please refer to the full syntax for each function [here](@ref dispersion_relatio
 
 ## [Parametric Spectra](@id parametric_spectra) 
 
-
-Brief description of parametric spectrum
-
-[pierson_moskowitz](@cite) [Hasselmann1973](@cite)
+We also include constructors for parametric wave spectra like Pierson-Mokowitz [pierson_moskowitz](@cite), JONSWAP [Hasselmann1973](@cite) spectrum. Examples are shown
+below.
 ```julia
 julia> f = (1.0:0.5:10.0) .* Hz;
 
@@ -92,7 +90,6 @@ and data(m² Hz⁻¹):
  0.02727015323859412
 
 ```
-
 ```julia
 julia> f = (1.0:0.5:10.0) .* Hz;
 
@@ -121,6 +118,8 @@ and data(m² Hz⁻¹):
  0.02893628972068863
  0.022497539992942253
 ```
+
+For omnidirectional spectra we also have the Cartwright spread.
 
 ```julia
 julia> Θ = (0:15:90)*°; f = (1:1:10)*Hz;
@@ -154,7 +153,8 @@ Please refer to the full syntax for each function [here](@ref parametric_spectra
 
 
 The following examples are different functions used in literature for characterizing wave
-spectra. 
+spectra. You can directly calculate the moments with the respective function or use the
+moment function to calculate the different characterizations.
 
 ```julia
 julia> x = (1.0:3:10.0) * Hz; S = OmnidirectionalSpectrum(([1.0, 6.0, 3.0, 2.0])*m^2, x);
@@ -186,9 +186,9 @@ Please refer to the full syntax for each function [here](@ref moments_syntax).
 
 ## [Spectral Shapes](@id spectral_shapes)
 
-Spectral shape was described in Mackay[MACKAY201617](@cite) after normalizing 
+Spectral shape was described in Mackay [MACKAY201617](@cite) after normalizing 
 omnidirectional wave spectra to have a significant waveheight ($H_S$) and ($T_e$) of 1.
-These were leveraged in a different paper[autoencoder2025](@cite) that used normalized 
+These were leveraged in a different paper [autoencoder2025](@cite) that used normalized 
 spectra to train a neural network architecture.
 
 ```julia
